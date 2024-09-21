@@ -3,6 +3,10 @@
   become: True
   gather_facts: no
   tasks: 
+    - name: Get Os name
+      shell: awk -F= '/^NAME/{print $2}' /etc/os-release | tr -d '"'
+      register: os_info
+
     - name: "Create a group"
       group: 
         name: "{{ item }}"
@@ -12,7 +16,6 @@
         - dev
         - qa
         
-
     - name: "Create a user BANGA on servers"
       user: 
         name: BANGA
@@ -24,11 +27,32 @@
       file:
         path: /root/my_created_dir
         state: directory
-        
+
     - name: "Create a file"
       file:
         path: /root/my_created_dir/my_created_file.txt
         state: touch
+    
+    - name: Print OS name
+      debug:
+        msg: "This OS name is : {{os_info.stdout}}" 
+    
+    - name: "Install httpd on Centos"
+      yum:
+        name: httpd
+        state: present
+      when: {{os_info.stdout}}=="CentOS Stream"
+    - name: Run httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: "Install nginx on Ubuntu"
+      apt:
+        name: nginx
+        state: present
+      when: {{os_info.stdout}}=="Ubuntu"
     # - name: "Patch servers"
     #   yum:
     #     name: '*'

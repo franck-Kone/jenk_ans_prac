@@ -22,6 +22,11 @@ pipeline{
                 sh "mkdir /root/playbooks || echo '' "
             }
         }
+        stage("Remove all playbooks") {
+            steps{
+                sh "rm -f /root/playbooks/* || echo '' "
+            }
+        }
         stage("move playbooks") {
             steps{
                 sh "mv /root/workspace/test1/play* /root/playbooks/play${BUILD_ID}.yml "
