@@ -1,1 +1,25 @@
+---
+- hosts: all
+  become: True
+  gather_facts: no
+  tasks: 
+    - name: "Create a group"
+      group: ["devops", "dev", "qa"]
+      state: present
 
+    - name: "Create a user BANGA on servers"
+      user: 
+        name: BANGA
+        comment: BANGA kef
+        groups: devops, dev
+        shell: /bin/bash
+    
+    - name: "Create a file"
+      file:
+        path: /root/my_created_dir/my_created_file.txt
+        state: touch
+    # - name: "Patch servers"
+    #   yum:
+    #     name: '*'
+    #     state: latest
+    #   when: 

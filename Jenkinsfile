@@ -14,11 +14,17 @@ pipeline{
 
             }
         }
+        stage("create playbooks directory") {
+            steps{
+                sh "mkdir /root/playbooks"
+            }
+        }
         stage("move playbooks") {
             steps{
                 sh "mv /root/workspace/test1/play* /root/playbooks/play${BUILD_ID}.yml"
             }
         }
+
         stage("run playbooks") {
             steps{
                 sh '''
