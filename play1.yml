@@ -5,7 +5,8 @@
   tasks: 
     - name: "Create a group"
       group: 
-        name: 
+        name: "{{item}}"
+        with_items:
           - devops
           - dev
           - qa
