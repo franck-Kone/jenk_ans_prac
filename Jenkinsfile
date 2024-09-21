@@ -9,8 +9,10 @@ pipeline{
             steps{
                 sh '''
                 pwd
+                mv /root/workspace/test1/Jenkinsfile /root
                 echo "$VAULT_PASS" > /tmp/vault_pass.txt
-                ansible all -m ping -i /root/inventory.yml --vault-password-file=/tmp/vault_pass.txt
+                cd /root
+                ansible all -m ping -i inventory.yml --vault-password-file=/tmp/vault_pass.txt
                 '''
 
                 // Clean up the temporary file
