@@ -55,9 +55,10 @@
         state: present
         update_cache: yes
       when: os_info.stdout == "Ubuntu"
+
     - name: "Add content to file created"
       copy:
-        path: /root/my_created_dir/my_created_file.txt
+        dest: /root/my_created_dir/my_created_file.txt
         content: <h1>THIS IS THE NEW <b>KEFKY</b> PAGE</h1>
     - name: "Change page content"
       copy:
