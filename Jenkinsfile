@@ -8,15 +8,26 @@ pipeline{
         stage('ping nodes'){
             steps{
                 sh '''
-                pwd
                 echo "$VAULT_PASS" > /tmp/vault_pass.txt
                 ansible all -m ping -i /root/inventory.yml --vault-password-file=/tmp/vault_pass.txt
                 '''
 
-                // Clean up the temporary file
+            }
+        }
+        stage("move playbooks") {
+            steps{
+                sh "mv /root/workspace/test1/play* /root/playbooks/play${BUILD_ID}.yml"
+            }
+        }
+        stage("run playbooks") {
+            steps{
                 sh '''
+                ansible-playbook /root/playbooks/play${BUILD_ID}.yml -vault-password-file=/tmp/vault_pass.txt
+                
+                // Clean up the temporary file
                 rm -f /tmp/vault_pass.txt
                 '''
+            
             }
         }
     }
