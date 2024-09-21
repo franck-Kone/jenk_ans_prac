@@ -24,6 +24,11 @@ pipeline{
                 sh "mv /root/workspace/test1/play* /root/playbooks/play${BUILD_ID}.yml "
             }
         }
+        stage("check playbook") {
+            steps{
+                sh "ansible-playbook /root/playbooks/play${BUILD_ID}.yml --vault-password-file=/tmp/vault_pass.txt --check"
+            }
+        }
 
         stage("run playbooks") {
             steps{

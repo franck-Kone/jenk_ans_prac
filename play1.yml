@@ -4,8 +4,9 @@
   gather_facts: no
   tasks: 
     - name: "Create a group"
-      group: ["devops", "dev", "qa"]
-      state: present
+      group: 
+        name: ["devops", "dev", "qa"]
+        state: present
 
     - name: "Create a user BANGA on servers"
       user: 
