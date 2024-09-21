@@ -7,7 +7,15 @@ pipeline{
     stages{
         stage('ping nodes'){
             steps{
-                sh "ansible all -m ping --vault-password-file <(echo $VAULT_PASS)"
+                sh '''
+                echo "$VAULT_PASS" > /tmp/vault_pass.txt
+                ansible all -m ping --vault-password-file=/tmp/vault_pass.txt
+                '''
+
+                // Clean up the temporary file
+                sh '''
+                rm -f /tmp/vault_pass.txt
+                '''
             }
         }
     }
