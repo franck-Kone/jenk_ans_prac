@@ -28,7 +28,7 @@ pipeline{
             steps{
                 sh '''
                 echo "$VAULT_PASS" > /tmp/vault_pass.txt
-                ansible-playbook /root/playbooks/play${BUILD_ID}.yml --vault-password-file=/tmp/vault_pass.txt --check
+                ansible-playbook -i /root/inventory.yml /root/playbooks/play${BUILD_ID}.yml --vault-password-file=/tmp/vault_pass.txt --check
 
                                 
                 // Clean up the temporary file
@@ -41,7 +41,7 @@ pipeline{
             steps{
                 sh '''
                 echo "$VAULT_PASS" > /tmp/vault_pass.txt
-                ansible-playbook /root/playbooks/play${BUILD_ID}.yml --vault-password-file=/tmp/vault_pass.txt
+                ansible-playbook -i /root/inventory.yml /root/playbooks/play${BUILD_ID}.yml --vault-password-file=/tmp/vault_pass.txt
                 
                 // Clean up the temporary file
                 rm -f /tmp/vault_pass.txt
