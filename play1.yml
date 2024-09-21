@@ -6,11 +6,12 @@
     - name: "Create a group"
       group: 
         name: "{{item}}"
+        state: present
         with_items:
           - devops
           - dev
           - qa
-        state: present
+        
 
     - name: "Create a user BANGA on servers"
       user: 
