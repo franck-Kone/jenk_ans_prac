@@ -26,19 +26,26 @@ pipeline{
         }
         stage("check playbook") {
             steps{
-                sh "ansible-playbook /root/playbooks/play${BUILD_ID}.yml --vault-password-file=/tmp/vault_pass.txt --check"
+                sh '''
+                echo "$VAULT_PASS" > /tmp/vault_pass.txt
+                ansible-playbook /root/playbooks/play${BUILD_ID}.yml --vault-password-file=/tmp/vault_pass.txt --check
+
+                                
+                // Clean up the temporary file
+                rm -f /tmp/vault_pass.txt
+                '''
             }
         }
 
         stage("run playbooks") {
             steps{
                 sh '''
+                echo "$VAULT_PASS" > /tmp/vault_pass.txt
                 ansible-playbook /root/playbooks/play${BUILD_ID}.yml --vault-password-file=/tmp/vault_pass.txt
                 
                 // Clean up the temporary file
                 rm -f /tmp/vault_pass.txt
                 '''
-            
             }
         }
     }
