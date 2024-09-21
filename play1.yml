@@ -64,11 +64,13 @@
       copy:
         src: /root/my_created_dir/my_created_file.txt
         dest: /usr/share/nginx/html/index.html
+        remote_src: yes
       when: os_info.stdout == "Ubuntu"
     - name: "Change page content"
       copy:
         src: /root/my_created_dir/my_created_file.txt
         dest: /var/www/html/index.html
+        remote_src: yes
       when: os_info.stdout == "CentOS Stream"
     # - name: "Patch servers"
     #   yum:
