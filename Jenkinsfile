@@ -1,5 +1,5 @@
 pipeline{
-    agent any
+    agent {label 'ansible-agent-id'}
        environment {
         VAULT_PASS = credentials('vault-pass-id') // Use Jenkins secret text credential ID
     }
