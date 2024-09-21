@@ -16,12 +16,12 @@ pipeline{
         }
         stage("create playbooks directory") {
             steps{
-                sh "mkdir /root/playbooks"
+                sh "mkdir /root/playbooks || echo '' "
             }
         }
         stage("move playbooks") {
             steps{
-                sh "mv /root/workspace/test1/play* /root/playbooks/play${BUILD_ID}.yml"
+                sh "mv /root/workspace/test1/play* /root/playbooks/play${BUILD_ID}.yml "
             }
         }
 
