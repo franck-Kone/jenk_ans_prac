@@ -5,12 +5,12 @@
   tasks: 
     - name: "Create a group"
       group: 
-        name: "{{item}}"
+        name: "{{ item }}"
         state: present
-        with_items:
-          - devops
-          - dev
-          - qa
+      with_items:
+        - devops
+        - dev
+        - qa
         
 
     - name: "Create a user BANGA on servers"
