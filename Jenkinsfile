@@ -28,7 +28,7 @@ pipeline{
         stage("run playbooks") {
             steps{
                 sh '''
-                ansible-playbook /root/playbooks/play${BUILD_ID}.yml -vault-password-file=/tmp/vault_pass.txt
+                ansible-playbook /root/playbooks/play${BUILD_ID}.yml --vault-password-file=/tmp/vault_pass.txt
                 
                 // Clean up the temporary file
                 rm -f /tmp/vault_pass.txt
