@@ -9,7 +9,7 @@ pipeline{
             steps{
                 sh '''
                 echo "$VAULT_PASS" > /tmp/vault_pass.txt
-                ansible all -m ping --vault-password-file=/tmp/vault_pass.txt
+                ansible all -m ping -i inventory.yml --vault-password-file=/tmp/vault_pass.txt
                 '''
 
                 // Clean up the temporary file
