@@ -47,6 +47,7 @@
         name: httpd
         state: started
         enabled: yes
+      when: os_info.stdout == "CentOS Stream"
 
     - name: "Install nginx on Ubuntu"
       apt:
