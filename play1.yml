@@ -41,7 +41,7 @@
       yum:
         name: httpd
         state: present
-      when: "{{os_info.stdout}}"=="CentOS Stream"
+      when: os_info.stdout == "CentOS Stream"
     - name: Run httpd
       service:
         name: httpd
@@ -52,7 +52,7 @@
       apt:
         name: nginx
         state: present
-      when: "{{os_info.stdout}}"=="Ubuntu"
+      when: os_info.stdout == "Ubuntu"
     # - name: "Patch servers"
     #   yum:
     #     name: '*'
