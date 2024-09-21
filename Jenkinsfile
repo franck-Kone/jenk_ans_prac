@@ -8,6 +8,7 @@ pipeline{
         stage('ping nodes'){
             steps{
                 sh '''
+                pwd
                 echo "$VAULT_PASS" > /tmp/vault_pass.txt
                 ansible all -m ping -i inventory.yml --vault-password-file=/tmp/vault_pass.txt
                 '''
