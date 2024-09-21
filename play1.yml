@@ -20,6 +20,11 @@
         groups: devops, dev
         shell: /bin/bash
     
+    - name: "Create a directory"
+      file:
+        path: /root/my_created_dir
+        state: directory
+        
     - name: "Create a file"
       file:
         path: /root/my_created_dir/my_created_file.txt
