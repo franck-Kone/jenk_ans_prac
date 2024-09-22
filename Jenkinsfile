@@ -26,9 +26,14 @@ pipeline{
         //         sh "rm -f /root/playbooks/* || echo '' "
         //     }
         // }
+        stage("verify folder exists") {
+            steps{
+                sh "ls /root/playbooks"
+            }
+        }
         stage("move playbooks") {
             steps{
-                sh "mv /root/workspace/my-pipeline/play* /root/playbooks/playbook_${BUILD_ID}.yml "
+                sh "mv /root/workspace/my-pipeline/play* /root/playbooks/playbook_${BUILD_ID}.yml"
             }
         }
         stage("check playbook") {
