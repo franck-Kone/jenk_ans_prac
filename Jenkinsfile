@@ -65,5 +65,8 @@ pipeline{
                 '''
             }
         }
+        stage("publish the last playbook to nodes") {
+            
+        }
     }
 }

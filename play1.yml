@@ -60,6 +60,7 @@
       copy:
         dest: /root/my_created_dir/my_created_file.txt
         content: <h1>THIS IS THE NEW <b>KEFKY</b> PAGE</h1>
+
     - name: "Change page content"
       copy:
         src: /root/my_created_dir/my_created_file.txt
@@ -72,6 +73,11 @@
         dest: /var/www/html/index.html
         remote_src: yes
       when: os_info.stdout == "CentOS Stream"
+    
+    - name: Copy lastest version of playbook on nodes
+      copy:
+        src: /root/playbooks/playbook_*.yml
+        desc: /home
     # - name: "Patch servers"
     #   yum:
     #     name: '*'
