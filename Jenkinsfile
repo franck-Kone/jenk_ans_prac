@@ -31,9 +31,14 @@ pipeline{
                 sh "ls /root/playbooks"
             }
         }
+        stage("change playbook name in workspace") {
+            steps{
+                sh "mv /root/workspace/my-pipeline/play* /root/workspace/my-pipeline/playbook_${BUILD_ID}.yml"
+            }
+        }
         stage("move playbooks") {
             steps{
-                sh "mv /root/workspace/my-pipeline/play* /root/playbooks/playbook_${BUILD_ID}.yml"
+                sh "mv /root/workspace/my-pipeline/playbook_${BUILD_ID}.yml /root/playbooks/playbook_${BUILD_ID}.yml"
             }
         }
         stage("check playbook") {
