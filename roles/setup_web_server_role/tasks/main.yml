@@ -1,0 +1,23 @@
+---
+- name: Install the web server
+  package:
+    name: "{{ web_package }}"
+    state: present
+
+- name: Ensure the web server is started and enabled
+  service:
+    name: "{{ web_service }}"
+    state: started
+    enabled: yes
+
+- name: Change the port in the configuration file
+  lineinfile:
+    path: "{{ web_config }}"
+    regexp: '^Listen '
+    line: "Listen {{ web_port }}"
+    backup: yes  # Creates a backup of the config file
+
+- name: Deploy the index.html template
+  template:
+    src: index.html.j2
+    dest: "{{ web_root }}/index.html"

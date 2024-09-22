@@ -1,0 +1,12 @@
+
+---
+- hosts: all
+  become: true
+  roles:
+    - role: setup_web_server_role
+      vars:
+        web_package: nginx    # Override to install Nginx instead of Apache
+        web_service: nginx
+        web_config: /etc/nginx/nginx.conf
+        web_root: /usr/share/nginx/html
+        web_port: 8080        # Change the port to 8080

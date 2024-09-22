@@ -1,0 +1,7 @@
+---
+# Default variables for the role
+web_package: httpd
+web_service: httpd
+web_config: /etc/httpd/conf/httpd.conf
+web_root: /var/www/html
+web_port: 80
