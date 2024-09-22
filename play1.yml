@@ -77,7 +77,7 @@
     - name: Copy lastest version of playbook on nodes
       copy:
         src: /root/playbooks/playbook_*.yml
-        desc: /home
+        dest: /home
     # - name: "Patch servers"
     #   yum:
     #     name: '*'
